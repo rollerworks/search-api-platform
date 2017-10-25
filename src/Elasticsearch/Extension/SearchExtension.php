@@ -59,8 +59,6 @@ class SearchExtension implements QueryCollectionExtensionInterface
         $configuration = (array) $configuration['elasticsearch'];
         ArrayKeysValidator::assertOnlyKeys($configuration, ['mappings'], $configPath);
 
-        $ids =
-
         // this snippet looks weird, factory should create a
         $conditionGenerator = $this->elasticsearchFactory->createCachedConditionGenerator(
             $this->elasticsearchFactory->createConditionGenerator($condition)
