@@ -2,15 +2,23 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the RollerworksSearch package.
+ *
+ * (c) Sebastiaan Stok <s.stok@rollerscapes.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Rollerworks\Component\Search\ApiPlatform\Elasticsearch\Extension;
 
-use Elastica\Client;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
+use Elastica\Client;
 use Elastica\Document;
 use Elastica\Search;
-use Ramsey\Uuid\Uuid;
 use Rollerworks\Component\Search\ApiPlatform\ArrayKeysValidator;
 use Rollerworks\Component\Search\Elasticsearch\ElasticsearchFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -29,7 +37,6 @@ class SearchExtension implements QueryCollectionExtensionInterface
         $this->requestStack = $requestStack;
         $this->elasticsearchFactory = $elasticsearchFactory;
         $this->elasticaClient = $elasticaClient;
-
     }
 
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
@@ -67,7 +74,7 @@ class SearchExtension implements QueryCollectionExtensionInterface
         $identifier = 'id';
         $search = new Search($this->elasticaClient);
         $response = $search->search($conditionGenerator->getQuery());
-        $identifierValues = array_map(function(Document $document) {
+        $identifierValues = array_map(function (Document $document) {
             return $document->getId();
         }, $response->getDocuments());
 
