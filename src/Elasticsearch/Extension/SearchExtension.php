@@ -15,8 +15,8 @@ namespace Rollerworks\Component\Search\ApiPlatform\Elasticsearch\Extension;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Search;
@@ -31,6 +31,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class SearchExtension implements QueryCollectionExtensionInterface
 {
     private $requestStack;
+    private $registry;
     private $elasticsearchFactory;
     private $elasticaClient;
     private $identifierNames = [];

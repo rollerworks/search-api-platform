@@ -1,6 +1,8 @@
 parameters:
     autoload_files:
         - vendor/autoload.php
+    excludes_analyse:
+        - vendor/
     ignoreErrors:
         #- '#__construct\(\) does not call parent constructor from .+#'
 

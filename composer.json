@@ -20,6 +20,8 @@
     "require-dev": {
         "symfony/phpunit-bridge": "^3.3.6 || ^4.0",
         "rollerworks/search-doctrine-orm": "^2.0,>2.0.0-ALPHA3",
+        "rollerworks/search-elasticsearch": "dev-master",
+        "friendsofsymfony/elastica-bundle": "^4.0",
         "doctrine/orm": "^2.5.6",
         "phpunit/phpunit": "^6.3"
     },
@@ -36,6 +38,10 @@
             "Rollerworks\\Component\\Search\\ApiPlatform\\Tests\\": "tests/",
             "ApiPlatform\\Core\\Tests\\Fixtures\\TestBundle\\Entity\\": "vendor/api-platform/core/tests/Fixtures/TestBundle/Entity"
         }
+    },
+    "suggest": {
+        "rollerworks/search-elasticsearch": "To use Elasticsearch-backed search",
+        "friendsofsymfony/elastica-bundle": "To use Elasticsearch-backed search"
     },
     "extra": {
         "branch-alias": {
