@@ -19,6 +19,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Query;
 use Elastica\Search;
 use Rollerworks\Component\Search\ApiPlatform\ArrayKeysValidator;
 use Rollerworks\Component\Search\Elasticsearch\ElasticsearchFactory;
@@ -62,9 +63,9 @@ class SearchExtension implements QueryCollectionExtensionInterface
         }
 
         $configuration = (array) $configuration['elasticsearch'];
-        ArrayKeysValidator::assertOnlyKeys($configuration, ['mappings', 'identifier', 'identifiers_normalizer'], $configPath);
+        ArrayKeysValidator::assertOnlyKeys($configuration, ['mappings', 'identifiers_normalizer'], $configPath);
 
-        // this snippet looks weird, factory should create a
+        // this snippet looks weird, factory should create the proper instance on its own
         $conditionGenerator = $this->elasticsearchFactory->createCachedConditionGenerator(
             $this->elasticsearchFactory->createConditionGenerator($condition)
         );
@@ -82,8 +83,19 @@ class SearchExtension implements QueryCollectionExtensionInterface
         }
 
         // TODO: temporary, how to do this better?
+        $query = new Query($conditionGenerator->getQuery());
+
+        // move limit/offset from QueryBuilder to Elasticsearch query
+        if (null !== $firstResult = $queryBuilder->getFirstResult()) {
+            $query->setFrom($firstResult);
+            $queryBuilder->setFirstResult(null);
+        }
+        if (null !== $maxResults = $queryBuilder->getMaxResults()) {
+            $query->setSize($maxResults);
+            $queryBuilder->setMaxResults(null);
+        }
         $search = new Search($this->elasticaClient);
-        $response = $search->search($conditionGenerator->getQuery());
+        $response = $search->search($query);
 
         // NOTE: written like this so we only check if we have a normalizer once
         if (null !== $normalizer) {
