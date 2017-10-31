@@ -94,7 +94,16 @@ class SearchExtension implements QueryCollectionExtensionInterface
             $query->setSize($maxResults);
             $queryBuilder->setMaxResults(null);
         }
+
         $search = new Search($this->elasticaClient);
+        $mappings = $conditionGenerator->getMappings();
+        foreach ($mappings as $mapping) {
+            $index = $this->elasticaClient->getIndex($mapping->indexName);
+            $type = $index->getType($mapping->typeName);
+            $search
+                ->addIndex($index)
+                ->addType($type);
+        }
         $response = $search->search($query);
 
         // NOTE: written like this so we only check if we have a normalizer once
