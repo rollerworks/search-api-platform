@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rollerworks\Component\Search\ApiPlatform\Tests\EventListener;
 
-use ApiPlatform\Exception\RuntimeException;
+use ApiPlatform\Metadata\Exception\RuntimeException;
 use Prophecy\Argument;
 use Rollerworks\Component\Search\ApiPlatform\EventListener\SearchConditionListener;
 use Rollerworks\Component\Search\ApiPlatform\SearchConditionEvent;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the RollerworksSearch package.
  *
@@ -11,9 +13,7 @@
 
 namespace Rollerworks\Component\Search\ApiPlatform\Tests\Fixtures;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Tests\Fixtures\TestBundle\Entity\RelatedDummy;
+use ApiPlatform\Metadata\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -23,16 +23,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  *
- * @ApiResource(attributes={"filters"={"my_dummy.search", "my_dummy.order", "my_dummy.date", "my_dummy.range", "my_dummy.boolean", "my_dummy.numeric"}})
  * @ORM\Entity
  */
+#[ApiResource(filters: ['my_dummy.search', 'my_dummy.order', 'my_dummy.date', 'my_dummy.range', 'my_dummy.boolean', 'my_dummy.numeric'])]
 class Dummy
 {
     /**
      * @var int The id
      *
      * @ORM\Column(type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -41,7 +43,9 @@ class Dummy
      * @var string The dummy name
      *
      * @ORM\Column
+     *
      * @Assert\NotBlank
+     *
      * @ApiProperty(iri="http://schema.org/name")
      */
     private $name;
@@ -50,6 +54,7 @@ class Dummy
      * @var string The dummy name alias
      *
      * @ORM\Column(nullable=true)
+     *
      * @ApiProperty(iri="https://schema.org/alternateName")
      */
     private $alias;
@@ -63,6 +68,7 @@ class Dummy
      * @var string A short description of the item
      *
      * @ORM\Column(nullable=true)
+     *
      * @ApiProperty(iri="https://schema.org/description")
      */
     public $description;
@@ -85,6 +91,7 @@ class Dummy
      * @var \DateTimeImmutable A dummy date
      *
      * @ORM\Column(type="datetime", nullable=true)
+     *
      * @Assert\DateTime
      */
     public $dummyDate;
@@ -131,7 +138,7 @@ class Dummy
      */
     public $nameConverted;
 
-    public static function staticMethod()
+    public static function staticMethod(): void
     {
     }
 
@@ -146,7 +153,7 @@ class Dummy
         return $this->id;
     }
 
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -156,7 +163,7 @@ class Dummy
         return $this->name;
     }
 
-    public function setAlias($alias)
+    public function setAlias($alias): void
     {
         $this->alias = $alias;
     }
@@ -166,7 +173,7 @@ class Dummy
         return $this->alias;
     }
 
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -176,15 +183,15 @@ class Dummy
         return $this->description;
     }
 
-    public function hasRole($role)
+    public function hasRole($role): void
     {
     }
 
-    public function setFoo(array $foo = null)
+    public function setFoo(?array $foo = null): void
     {
     }
 
-    public function setDummyDate(\DateTimeImmutable $dummyDate = null)
+    public function setDummyDate(?\DateTimeImmutable $dummyDate = null): void
     {
         $this->dummyDate = $dummyDate;
     }
@@ -206,7 +213,7 @@ class Dummy
         return $this->dummyPrice;
     }
 
-    public function setJsonData($jsonData)
+    public function setJsonData($jsonData): void
     {
         $this->jsonData = $jsonData;
     }
@@ -221,16 +228,6 @@ class Dummy
         return $this->relatedDummy;
     }
 
-    public function setRelatedDummy(RelatedDummy $relatedDummy)
-    {
-        $this->relatedDummy = $relatedDummy;
-    }
-
-    public function addRelatedDummy(RelatedDummy $relatedDummy)
-    {
-        $this->relatedDummies->add($relatedDummy);
-    }
-
     /**
      * @return bool
      */
@@ -242,12 +239,12 @@ class Dummy
     /**
      * @param bool $dummyBoolean
      */
-    public function setDummyBoolean($dummyBoolean)
+    public function setDummyBoolean($dummyBoolean): void
     {
         $this->dummyBoolean = $dummyBoolean;
     }
 
-    public function setDummy($dummy = null)
+    public function setDummy($dummy = null): void
     {
         $this->dummy = $dummy;
     }

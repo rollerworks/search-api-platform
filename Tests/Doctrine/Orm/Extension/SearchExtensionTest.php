@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rollerworks\Component\Search\ApiPlatform\Tests\Doctrine\Orm\Extension;
 
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGenerator;
-use ApiPlatform\Exception\RuntimeException;
+use ApiPlatform\Metadata\Exception\RuntimeException;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;

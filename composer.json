@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=8.1",
-        "api-platform/core": "^2.0.10 || ^3.2",
+        "api-platform/core": "^4.2",
         "rollerworks/search": ">=2.0.0-BETA2 ^2.0@dev",
         "rollerworks/uri-encoder": "^1.1.0 || ^2.0",
         "symfony/http-foundation": "^6.4 || ^7.0"

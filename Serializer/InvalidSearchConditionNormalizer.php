@@ -22,10 +22,11 @@ use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
- * Converts {@see InvalidSearchConditionException}
- * to a Hydra error representation.
+ * Converts {@see InvalidSearchConditionException} to a Hydra error representation.
  *
- * @author Sebastiaan Stok <s.stok@rollerscapes.net>
+ * @deprecated use the {@see ConditionErrorMessageNormalizer} with the
+ *             {@see \Rollerworks\Component\Search\ApiPlatform\Exception\InvalidConditionException}
+ *             as resource handle instead
  */
 final class InvalidSearchConditionNormalizer implements NormalizerInterface
 {
@@ -38,12 +39,15 @@ final class InvalidSearchConditionNormalizer implements NormalizerInterface
         $this->serializePayloadFields = $serializePayloadFields;
     }
 
-    public function normalize($object, ?string $format = null, array $context = []): array
+    /**
+     * @return array{type: string, title: string, detail: string, violations: array<array{propertyPath: string, message: string, payload?: array<string, mixed>}>}
+     */
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array
     {
         $list = new ConstraintViolationList();
 
         /** @var ConditionErrorMessage $message */
-        foreach ($object->getErrors() as $message) {
+        foreach ($data->getErrors() as $message) {
             $violation = new ConstraintViolation(
                 $message->message,
                 $message->messageTemplate,
@@ -64,7 +68,7 @@ final class InvalidSearchConditionNormalizer implements NormalizerInterface
         return [
             'type' => $context['type'] ?? 'https://tools.ietf.org/html/rfc2616#section-10',
             'title' => $context['title'] ?? 'An error occurred',
-            'detail' => $messages ? implode("\n", $messages) : (string) $object,
+            'detail' => $messages ? implode("\n", $messages) : (string) $data,
             'violations' => $violations,
         ];
     }

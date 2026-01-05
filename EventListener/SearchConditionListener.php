@@ -13,11 +13,14 @@ declare(strict_types=1);
 
 namespace Rollerworks\Component\Search\ApiPlatform\EventListener;
 
-use ApiPlatform\Exception\RuntimeException;
+use ApiPlatform\Metadata\Exception\RuntimeException;
 use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 use Psr\SimpleCache\CacheInterface;
+use Rollerworks\Component\Search\ApiPlatform\Exception\InvalidConditionException;
 use Rollerworks\Component\Search\ApiPlatform\SearchConditionEvent;
+use Rollerworks\Component\Search\ErrorList;
+use Rollerworks\Component\Search\Exception\InvalidSearchConditionException;
 use Rollerworks\Component\Search\Exception\UnexpectedTypeException;
 use Rollerworks\Component\Search\Input\CachingInputProcessor;
 use Rollerworks\Component\Search\Input\ProcessorConfig;
@@ -85,6 +88,7 @@ final class SearchConditionListener
         $this->configureProcessor($config, $searchConfig, $resourceClass);
 
         $condition = $this->getCondition($request, $config);
+
         $conditionEvent = new SearchConditionEvent($condition, $resourceClass, $request);
 
         // First Dispatch a specific event to for this resource-class and then a generic one for ease of listening.
@@ -195,6 +199,16 @@ final class SearchConditionListener
             );
         }
 
-        return $inputProcessor->process($config, $input);
+        try {
+            return $inputProcessor->process($config, $input);
+        } catch (InvalidSearchConditionException $e) {
+            $error = $e->getErrors();
+
+            if (\is_array($error)) {
+                $error = new ErrorList($error);
+            }
+
+            throw new InvalidConditionException($error, 0, $e);
+        }
     }
 }
