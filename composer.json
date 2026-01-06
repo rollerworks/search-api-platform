@@ -13,8 +13,7 @@
         "php": ">=8.1",
         "api-platform/core": "^4.2",
         "rollerworks/search": ">=2.0.0-BETA2 ^2.0@dev",
-        "rollerworks/uri-encoder": "^1.1.0 || ^2.0",
-        "symfony/http-foundation": "^6.4 || ^7.0"
+        "symfony/http-foundation": "^6.4 || ^7.0 || ^8.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.5.6",
