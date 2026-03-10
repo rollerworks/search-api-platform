@@ -21,7 +21,7 @@ final class ConditionErrorMessageNormalizer implements NormalizerInterface
     /**
      * @param ConditionErrorMessage $data
      *
-     * @return array{type: string, title: string, detail: string, violations: array<array{propertyPath: string, message: string, payload?: array<string, mixed>}>}
+     * @return array{propertyPath: string, message: string}
      */
     public function normalize(mixed $data, ?string $format = null, array $context = []): array
     {

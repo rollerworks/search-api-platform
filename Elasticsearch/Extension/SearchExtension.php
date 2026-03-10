@@ -99,14 +99,14 @@ class SearchExtension implements QueryCollectionExtensionInterface
             $normalizer = $configuration['identifiers_normalizer'];
 
             if (! \is_callable($normalizer)) {
-                throw new BadMethodCallException('Parameter "identifiers_normalizer" must be a valid callable');
+                throw new BadMethodCallException('Parameter "identifiers_normalizer" must be a valid callable.');
             }
         }
 
         $query = $conditionGenerator->getQuery();
 
         // move limit/offset from QueryBuilder to Elasticsearch query
-        $firstResult = ($queryBuilder->getFirstResult() ?? 1);
+        $firstResult = ($queryBuilder->getFirstResult() ?: 1);
 
         if ($firstResult !== 1) {
             $query->setFrom($firstResult);

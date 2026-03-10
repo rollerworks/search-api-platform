@@ -31,8 +31,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class SearchExtension implements QueryCollectionExtensionInterface
 {
-    private $requestStack;
-    private $ormFactory;
+    private RequestStack $requestStack;
+    private DoctrineOrmFactory $ormFactory;
 
     public function __construct(RequestStack $requestStack, DoctrineOrmFactory $ormFactory)
     {
