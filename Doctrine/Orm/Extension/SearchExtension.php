@@ -31,13 +31,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class SearchExtension implements QueryCollectionExtensionInterface
 {
-    private RequestStack $requestStack;
-    private DoctrineOrmFactory $ormFactory;
-
-    public function __construct(RequestStack $requestStack, DoctrineOrmFactory $ormFactory)
-    {
-        $this->requestStack = $requestStack;
-        $this->ormFactory = $ormFactory;
+    public function __construct(
+        private readonly RequestStack $requestStack,
+        private readonly DoctrineOrmFactory $ormFactory,
+    ) {
     }
 
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, ?Operation $operation = null, array $context = []): void

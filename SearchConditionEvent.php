@@ -31,15 +31,11 @@ final class SearchConditionEvent extends Event
      */
     public const SEARCH_CONDITION_EVENT = 'rollerworks_search.process.primary_condition';
 
-    private $searchCondition;
-    private $resourceClass;
-    private $request;
-
-    public function __construct(?SearchCondition $searchCondition, string $resourceClass, Request $request)
-    {
-        $this->searchCondition = $searchCondition;
-        $this->resourceClass = $resourceClass;
-        $this->request = $request;
+    public function __construct(
+        private readonly ?SearchCondition $searchCondition,
+        private readonly string $resourceClass,
+        private readonly Request $request,
+    ) {
     }
 
     public function getSearchCondition(): ?SearchCondition

@@ -30,13 +30,13 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  */
 final class InvalidSearchConditionNormalizer implements NormalizerInterface
 {
-    private $serializePayloadFields;
-    private $nameConverter;
-
-    public function __construct(?array $serializePayloadFields = null, ?NameConverterInterface $nameConverter = null)
-    {
-        $this->nameConverter = $nameConverter;
-        $this->serializePayloadFields = $serializePayloadFields;
+    /**
+     * @param string[]|null $serializePayloadFields
+     */
+    public function __construct(
+        private readonly ?array $serializePayloadFields = null,
+        private readonly ?NameConverterInterface $nameConverter = null,
+    ) {
     }
 
     /**

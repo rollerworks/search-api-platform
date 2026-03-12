@@ -59,11 +59,11 @@ class InvalidConditionException extends RuntimeException implements ProblemExcep
     private int $status = 422;
 
     /** @var ConditionErrorMessage[] */
-    private array $errors;
+    private readonly array $errors;
 
     #[Groups(['jsonld', 'json', 'jsonapi'])]
     #[ApiProperty(writable: false, initializable: false)]
-    private string $detail;
+    private readonly string $detail;
 
     public function __construct(ErrorList $error, int $code = 0, ?\Throwable $previous = null)
     {

@@ -32,18 +32,15 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class SearchExtension implements QueryCollectionExtensionInterface
 {
-    private $requestStack;
-    private $registry;
-    private $elasticsearchFactory;
-    private $client;
-    private $identifierNames = [];
+    /** @var array<string, string[]> */
+    private array $identifierNames = [];
 
-    public function __construct(RequestStack $requestStack, ManagerRegistry $registry, ElasticsearchFactory $elasticsearchFactory, Client $client)
-    {
-        $this->requestStack = $requestStack;
-        $this->registry = $registry;
-        $this->elasticsearchFactory = $elasticsearchFactory;
-        $this->client = $client;
+    public function __construct(
+        private readonly RequestStack $requestStack,
+        private readonly ManagerRegistry $registry,
+        private readonly ElasticsearchFactory $elasticsearchFactory,
+        private readonly Client $client,
+    ) {
     }
 
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, ?Operation $operation = null, array $context = []): void
@@ -134,7 +131,7 @@ class SearchExtension implements QueryCollectionExtensionInterface
         if ($normalizer !== null) {
             $callable = static fn (Document $document) => \call_user_func($normalizer, $document->getId());
         } else {
-            $callable = static fn (Document $document) => $document->getId();
+            $callable = static fn (Document $document): ?string => $document->getId();
         }
         $ids = array_map($callable, $response->getDocuments());
 

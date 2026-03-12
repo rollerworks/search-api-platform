@@ -44,19 +44,13 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
  */
 final class SearchConditionListener
 {
-    private $searchFactory;
-    private $inputProcessorLoader;
-    private ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactory;
-    private $eventDispatcher;
-    private $cache;
-
-    public function __construct(SearchFactory $searchFactory, InputProcessorLoader $inputProcessorLoader, ResourceMetadataCollectionFactoryInterface $resourceMetadataFactory, EventDispatcherInterface $eventDispatcher, ?CacheInterface $cache = null)
-    {
-        $this->searchFactory = $searchFactory;
-        $this->inputProcessorLoader = $inputProcessorLoader;
-        $this->resourceMetadataCollectionFactory = $resourceMetadataFactory;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->cache = $cache;
+    public function __construct(
+        private readonly SearchFactory $searchFactory,
+        private readonly InputProcessorLoader $inputProcessorLoader,
+        private readonly ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactory,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly ?CacheInterface $cache = null,
+    ) {
     }
 
     /**

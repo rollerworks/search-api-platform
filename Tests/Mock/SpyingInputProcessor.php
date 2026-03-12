@@ -21,8 +21,8 @@ use Rollerworks\Component\Search\Value\ValuesGroup;
 
 final class SpyingInputProcessor implements InputProcessor
 {
-    private $config;
-    private $input;
+    private ?ProcessorConfig $config = null;
+    private mixed $input;
 
     public static function getCondition(): SearchCondition
     {
@@ -32,7 +32,7 @@ final class SpyingInputProcessor implements InputProcessor
         return new SearchCondition(new FieldSetStub(), $valuesGroup);
     }
 
-    public function process(ProcessorConfig $config, $input): SearchCondition
+    public function process(ProcessorConfig $config, mixed $input): SearchCondition
     {
         $this->config = $config;
         $this->input = $input;

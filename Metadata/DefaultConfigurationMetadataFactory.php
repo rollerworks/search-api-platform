@@ -26,8 +26,9 @@ use ApiPlatform\Metadata\Resource\ResourceMetadataCollection;
  */
 final class DefaultConfigurationMetadataFactory implements ResourceMetadataCollectionFactoryInterface
 {
-    public function __construct(private readonly ResourceMetadataCollectionFactoryInterface $decorated)
-    {
+    public function __construct(
+        private readonly ResourceMetadataCollectionFactoryInterface $decorated,
+    ) {
     }
 
     public function create(string $resourceClass): ResourceMetadataCollection
