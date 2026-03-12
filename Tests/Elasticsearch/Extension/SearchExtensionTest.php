@@ -16,6 +16,7 @@ namespace Rollerworks\Component\Search\ApiPlatform\Tests\Elasticsearch\Extension
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGenerator;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\Expr\Func;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\Mapping\ClassMetadata;
@@ -51,7 +52,7 @@ final class SearchExtensionTest extends TestCase
         $elasticaResponse = $this->createResponse($ids);
         $searchCondition = $this->createCondition();
 
-        $queryFunctionProphecy = $this->prophesize(Expr\Func::class);
+        $queryFunctionProphecy = $this->prophesize(Func::class);
         $queryFunction = $queryFunctionProphecy->reveal();
 
         $queryExpressionProphecy = $this->prophesize(Expr::class);

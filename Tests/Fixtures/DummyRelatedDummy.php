@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rollerworks\Component\Search\ApiPlatform\Tests\Fixtures;
 
+/**
+ * @internal
+ */
 final class DummyRelatedDummy
 {
-
 }

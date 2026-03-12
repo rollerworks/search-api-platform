@@ -33,12 +33,12 @@ final class ConditionErrorMessageNormalizer implements NormalizerInterface
 
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return ($format === 'json' || $format === 'jsonproblem' || $format === 'jsonld') && $data instanceof ConditionErrorMessage;
+        return \in_array($format, ['json', 'jsonproblem', 'jsonld'], true) && $data instanceof ConditionErrorMessage;
     }
 
     public function getSupportedTypes(?string $format): array
     {
-        if ($format === 'json' || $format === 'jsonproblem' || $format === 'jsonld') {
+        if (\in_array($format, ['json', 'jsonproblem', 'jsonld'], true)) {
             return [
                 ConditionErrorMessage::class => true,
             ];

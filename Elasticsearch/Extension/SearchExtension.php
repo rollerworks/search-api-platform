@@ -129,7 +129,7 @@ class SearchExtension implements QueryCollectionExtensionInterface
 
         // NOTE: written like this so we only check if we have a normalizer once
         if ($normalizer !== null) {
-            $callable = static fn (Document $document) => \call_user_func($normalizer, $document->getId());
+            $callable = static fn (Document $document) => $normalizer($document->getId());
         } else {
             $callable = static fn (Document $document): ?string => $document->getId();
         }

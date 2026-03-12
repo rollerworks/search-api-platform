@@ -461,7 +461,7 @@ final class SearchConditionListenerTest extends SearchIntegrationTestCase
         return new InputProcessorLoader(
             new ClosureContainer(
                 [
-                    $name => static fn () => $inputProcessor,
+                    $name => static fn (): InputProcessor => $inputProcessor,
                 ]
             ),
             [$name => $name]
