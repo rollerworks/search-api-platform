@@ -25,7 +25,9 @@ use Rollerworks\Component\Search\Exception\InvalidSearchConditionException;
  */
 final class InvalidSearchConditionNormalizerTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function support_normalization(): void
     {
         $normalizer = new InvalidSearchConditionNormalizer();
@@ -35,7 +37,9 @@ final class InvalidSearchConditionNormalizerTest extends TestCase
         self::assertFalse($normalizer->supportsNormalization(new \stdClass(), 'jsonproblem'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function normalize(): void
     {
         $normalizer = new InvalidSearchConditionNormalizer();

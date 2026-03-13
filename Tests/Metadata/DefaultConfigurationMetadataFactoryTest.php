@@ -26,7 +26,9 @@ final class DefaultConfigurationMetadataFactoryTest extends TestCase
 {
     use MetadataFactoryTrait;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_merges_defaults_into_all_configs(): void
     {
         $decorated = $this->createResourceMetadataFactory([
@@ -82,7 +84,9 @@ final class DefaultConfigurationMetadataFactoryTest extends TestCase
         self::assertEquals($resourceMetadata, $factory->create('dummy'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_returns_without_updating_when_no_defaults_were_set(): void
     {
         $resourceMetadata = $this->getMetadataCollection([
@@ -109,7 +113,9 @@ final class DefaultConfigurationMetadataFactoryTest extends TestCase
         self::assertSame($resourceMetadata, $factory->create('Foo'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_returns_without_updating_when_no_search_config_was_set(): void
     {
         $resourceMetadata = $this->getMetadataCollection([]);
@@ -120,7 +126,9 @@ final class DefaultConfigurationMetadataFactoryTest extends TestCase
         self::assertSame($resourceMetadata, $factory->create('Foo'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_returns_when_no_operations_were_set(): void
     {
         $resourceMetadata = new ResourceMetadataCollection('Foo', [new ApiResource()]);

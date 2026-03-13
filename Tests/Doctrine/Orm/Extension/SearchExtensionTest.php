@@ -31,12 +31,16 @@ use Rollerworks\Component\Search\Value\ValuesGroup;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/** @internal */
+/**
+ * @internal
+ */
 final class SearchExtensionTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function apply_to_collection_with_valid_condition(): void
     {
         $searchCondition = $this->createCondition();
@@ -72,7 +76,9 @@ final class SearchExtensionTest extends TestCase
         $orderExtensionTest->applyToCollection($queryBuilder, new QueryNameGenerator(), Dummy::class, new Get(name: 'get'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function apply_to_collection_with_relations(): void
     {
         $searchCondition = $this->createCondition();
@@ -229,7 +235,9 @@ final class SearchExtensionTest extends TestCase
         ];
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function apply_to_collection_without_condition(): void
     {
         $ormFactoryProphecy = $this->prophesize(DoctrineOrmFactory::class);

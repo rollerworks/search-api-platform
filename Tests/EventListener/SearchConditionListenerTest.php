@@ -39,7 +39,9 @@ final class SearchConditionListenerTest extends SearchIntegrationTestCase
 {
     use MetadataFactoryTrait;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_sets_search_condition_and_config_for_empty_query(): void
     {
         $httpKernel = $this->createMock(HttpKernelInterface::class);
@@ -72,7 +74,9 @@ final class SearchConditionListenerTest extends SearchIntegrationTestCase
         self::assertEquals(BookFieldSet::class, $inputProcessor->getConfig()->getFieldSet()->getSetName());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_sets_search_condition_and_config_for_json_query(): void
     {
         $httpKernel = $this->createMock(HttpKernelInterface::class);
@@ -107,7 +111,9 @@ final class SearchConditionListenerTest extends SearchIntegrationTestCase
         self::assertEquals(BookFieldSet::class, $config->getFieldSet()->getSetName());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_sets_search_condition_and_config_for_context(): void
     {
         $httpKernel = $this->createMock(HttpKernelInterface::class);
@@ -153,7 +159,9 @@ final class SearchConditionListenerTest extends SearchIntegrationTestCase
         self::assertEquals(BookFieldSet::class, $config->getFieldSet()->getSetName());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_does_nothing_when_no_metadata_is_set(): void
     {
         $httpKernel = $this->createMock(HttpKernelInterface::class);
@@ -173,7 +181,9 @@ final class SearchConditionListenerTest extends SearchIntegrationTestCase
         self::assertOperationAttrEquals(['_api_resource_class' => 'dummy', '_api_operation_name' => 'get_collection'], $request);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_does_nothing_not_cacheable_requests(): void
     {
         $httpKernel = $this->createMock(HttpKernelInterface::class);
@@ -199,7 +209,9 @@ final class SearchConditionListenerTest extends SearchIntegrationTestCase
         ], $request);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_maps_configuration_processor_configuration(): void
     {
         $httpKernel = $this->createMock(HttpKernelInterface::class);
@@ -248,7 +260,9 @@ final class SearchConditionListenerTest extends SearchIntegrationTestCase
         self::assertEquals(30, $config->getCacheTTL());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_stores_cached_result_when_configured(): void
     {
         $httpKernel = $this->createMock(HttpKernelInterface::class);
@@ -296,7 +310,9 @@ final class SearchConditionListenerTest extends SearchIntegrationTestCase
         self::assertEquals(30, $config->getCacheTTL());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_does_not_store_cached_result_when_ttl_is_not_configured(): void
     {
         $httpKernel = $this->createMock(HttpKernelInterface::class);

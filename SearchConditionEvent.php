@@ -26,9 +26,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class SearchConditionEvent extends Event
 {
-    /**
-     * @Event
-     */
+    /** @Event */
     public const SEARCH_CONDITION_EVENT = 'rollerworks_search.process.primary_condition';
 
     public function __construct(

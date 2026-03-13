@@ -38,12 +38,16 @@ use Rollerworks\Component\Search\Value\ValuesGroup;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/** @internal */
+/**
+ * @internal
+ */
 final class SearchExtensionTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function apply_to_collection_with_valid_condition(): void
     {
         $query = new Query(['query' => ['bool' => ['must' => 'foo']]]);
